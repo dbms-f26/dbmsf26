@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student
+      POSTGRES_DB: coursedb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./seed:/docker-entrypoint-initdb.d
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: student@example.com
+      PGADMIN_DEFAULT_PASSWORD: student
+    ports:
+      - "5050:80"
+volumes:
+  postgres-data:

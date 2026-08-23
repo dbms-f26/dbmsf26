@@ -1,0 +1,16 @@
+{
+  "name": "DB Course Environment",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "forwardPorts": [5432, 5050],
+  "portsAttributes": {
+    "5050": { "label": "pgAdmin (UI)" },
+    "5432": { "label": "Postgres" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-ossdata.vscode-postgresql"]
+    }
+  }
+}

@@ -1,6 +1,8 @@
 --
 -- PostgreSQL database dump
 --
+CREATE SCHEMA IF NOT EXISTS northwind;
+SET search_path TO northwind;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;

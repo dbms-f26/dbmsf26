@@ -1,2 +1,3 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
-RUN apt-get update && apt-get install -y postgresql-client
+RUN apt-get update && apt-get install -y postgresql-client python3-pip
+RUN pip install flask psycopg2-binary

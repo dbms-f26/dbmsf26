@@ -1,1 +1,1 @@
-select count(*) from employees;
+select  count(*) from employees;

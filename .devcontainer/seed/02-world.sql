@@ -2,7 +2,8 @@
 -- Original source: MySQL "world" sample database
 -- Converted for use in the DBMS course PostgreSQL environment
 
-CREATE SCHEMA IF NOT EXISTS world;
+DROP SCHEMA IF EXISTS world CASCADE;
+CREATE SCHEMA world;
 SET search_path TO world;
 
 -- Table: country

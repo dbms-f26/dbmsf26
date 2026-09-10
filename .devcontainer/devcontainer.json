@@ -3,14 +3,14 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "forwardPorts": [5432, 5050],
+  "forwardPorts": [5432, 5000],
   "portsAttributes": {
-    "5050": { "label": "pgAdmin (UI)" },
+    "5000": { "label": "Flask App" },
     "5432": { "label": "Postgres" }
   },
   "customizations": {
     "vscode": {
-      "extensions": ["ms-ossdata.vscode-postgresql"]
+      "extensions": ["ms-ossdata.vscode-pgsql"]
     }
   }
 }

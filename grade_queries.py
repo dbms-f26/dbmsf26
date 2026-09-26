@@ -44,7 +44,7 @@ should run against, e.g. world or northwind.
 --------------------------------------------------------------------------
 CONFIGURATION
 --------------------------------------------------------------------------
-GITHUB_ORG, GITHUB_TOKEN, REPO_PREFIX, and the DB_* settings are still
+GITHUB_ORG, GITHUB_TOKEN, and the DB_* settings are still
 read from the CONFIG block below, or from environment variables of the
 same name (recommended for GITHUB_TOKEN, so it isn't hardcoded).
 """
@@ -64,7 +64,12 @@ from datetime import datetime
 
 GITHUB_ORG = os.environ.get("GITHUB_ORG", "dbms-f26")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")  # a fine-grained PAT with read access to the org's repos
-REPO_PREFIX = os.environ.get("REPO_PREFIX", "dbmsf26-")  # only repos starting with this are graded
+if not GITHUB_TOKEN:
+    try:
+        GITHUB_TOKEN = subprocess.check_output(["gh", "auth", "token"], text=True).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        print("ERROR: Please log in using 'gh auth login' or set GITHUB_TOKEN.")
+        exit(1)
 
 # FILE_PATH_IN_REPO and ANSWER_KEY_PATH are no longer set here -- they're
 # passed in on the command line each time you run the script (see main()),
@@ -105,9 +110,12 @@ def parse_queries(sql_text):
     """
     # Strip full-line comments so a comment-only line between queries
     # doesn't accidentally get treated as a (blank) statement.
+    lines = []
     for ln in sql_text.splitlines():
-      if !ln.strip().startswith("--") and !ln.strip().startswith("SET"):
-        lines[] = ln
+      if ln.strip().startswith("--") or ln.strip().startswith("SET"):
+        pass
+      else:  
+        lines.append(ln)
     cleaned = "\n".join(lines)
 
     statements = [s.strip() for s in cleaned.split(";")]
@@ -260,8 +268,8 @@ def main():
     answer_key = build_answer_key(conn, answer_key_path, schema)
     print(f"Answer key has {len(answer_key)} question(s): {sorted(answer_key.keys())}\n")
 
-    print(f"Listing repos in '{GITHUB_ORG}' starting with '{REPO_PREFIX}'...")
-    repos = list_org_repos(GITHUB_ORG, GITHUB_TOKEN, REPO_PREFIX)
+    print(f"Listing repos in '{GITHUB_ORG}'")
+    repos = list_org_repos(GITHUB_ORG, GITHUB_TOKEN)
     print(f"Found {len(repos)} repo(s).\n")
 
     # One subfolder per run, named after the file being graded and the
@@ -278,7 +286,7 @@ def main():
     results = []  # rows for the CSV: student, question, status, detail
 
     for repo in repos:
-        student = repo[len(REPO_PREFIX):] or repo
+        student = repo
         print(f"--- {repo} ---")
         content = fetch_file_from_repo(GITHUB_ORG, repo, file_to_grade, GITHUB_TOKEN)
 

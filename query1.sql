@@ -19,7 +19,7 @@ SELECT language
 FROM countrylanguage
 WHERE country_code = 'IND'
 ORDER BY language;
-
+--
 --Same list of languages but order them by the percentage of people in India who speak them, in descending order.
 
 SELECT language, percentage

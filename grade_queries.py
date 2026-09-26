@@ -58,6 +58,7 @@ import argparse
 import psycopg2
 import urllib.request
 import json
+import subprocess
 from datetime import datetime
 
 # ============================== CONFIG ====================================
@@ -197,8 +198,8 @@ def github_api_get(path, token):
         return json.loads(resp.read().decode("utf-8"))
 
 
-def list_org_repos(org, token, prefix):
-    """Returns a list of repo names in the org that start with `prefix`."""
+def list_org_repos(org, token):
+    """Returns a list of repo names in the org."""
     repos = []
     page = 1
     while True:
@@ -206,8 +207,7 @@ def list_org_repos(org, token, prefix):
         if not data:
             break
         for repo in data:
-            if repo["name"].startswith(prefix):
-                repos.append(repo["name"])
+            repos.append(repo["name"])
         page += 1
     return repos
 

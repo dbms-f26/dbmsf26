@@ -1,0 +1,468 @@
+student,question,status,detail,submitted_query
+dbmsf26,1,PASS,,"SELECT population
+FROM country
+WHERE code = 'USA'"
+dbmsf26,2,PASS,,"SELECT code
+FROM country
+WHERE name = 'India'"
+dbmsf26,3,PASS,,"SELECT language
+FROM countrylanguage
+WHERE country_code = 'IND'
+ORDER BY language"
+dbmsf26,4,PASS,,"SELECT language, percentage
+FROM countrylanguage
+WHERE country_code = 'IND'
+ORDER BY percentage DESC"
+dbmsf26,5,PASS,,"SELECT COUNT(*)
+FROM countrylanguage
+WHERE language = 'English'"
+dbmsf26,6,PASS,,"SELECT population/surface_area 
+FROM country
+WHERE code = 'USA'"
+dbmsf26,7,PASS,,"SELECT SUM(population)
+FROM city
+WHERE country_code = 'USA'"
+dbmsf26,8,PASS,,"SELECT AVG(life_expectancy)
+FROM country
+WHERE Continent = 'Europe'"
+bushj,1,MISSING_FILE,,
+bushj,2,MISSING_FILE,,
+bushj,3,MISSING_FILE,,
+bushj,4,MISSING_FILE,,
+bushj,5,MISSING_FILE,,
+bushj,6,MISSING_FILE,,
+bushj,7,MISSING_FILE,,
+bushj,8,MISSING_FILE,,
+dbmsf26-habashj,1,MISSING_FILE,,
+dbmsf26-habashj,2,MISSING_FILE,,
+dbmsf26-habashj,3,MISSING_FILE,,
+dbmsf26-habashj,4,MISSING_FILE,,
+dbmsf26-habashj,5,MISSING_FILE,,
+dbmsf26-habashj,6,MISSING_FILE,,
+dbmsf26-habashj,7,MISSING_FILE,,
+dbmsf26-habashj,8,MISSING_FILE,,
+dbmsf26-habashj2,1,MISSING_FILE,,
+dbmsf26-habashj2,2,MISSING_FILE,,
+dbmsf26-habashj2,3,MISSING_FILE,,
+dbmsf26-habashj2,4,MISSING_FILE,,
+dbmsf26-habashj2,5,MISSING_FILE,,
+dbmsf26-habashj2,6,MISSING_FILE,,
+dbmsf26-habashj2,7,MISSING_FILE,,
+dbmsf26-habashj2,8,MISSING_FILE,,
+dbmsf26-barillasd,1,PASS,,SELECT population from country where code='USA'
+dbmsf26-barillasd,2,PASS,,SELECT code from country where name='India'
+dbmsf26-barillasd,3,PASS,,Select LANGUAGE from countrylanguage where country_code='IND'
+dbmsf26-barillasd,4,FAIL,"expected 12 row(s), got 12 row(s)",Select LANGUAGE from countrylanguage where country_code='IND' ORDER BY percentage DESC
+dbmsf26-barillasd,5,PASS,,SELECT count(*) from countrylanguage where language like 'English%'
+dbmsf26-barillasd,6,PASS,,SELECT AVG(population/surface_area) from country where code='USA'
+dbmsf26-barillasd,7,PASS,,SELECT SUM(population) from city where country_code='USA'
+dbmsf26-barillasd,8,PASS,,SELECT AVG(life_expectancy) from country where continent = 'Europe'
+dbmsf26-Morilloa,1,PASS,,"select population
+from country
+where code = 'USA'"
+dbmsf26-Morilloa,2,PASS,,"select code 
+from country
+where name = 'India'"
+dbmsf26-Morilloa,3,PASS,,"select language from countrylanguage
+where country_code = 'IND'"
+dbmsf26-Morilloa,4,PASS,,"select language, percentage
+from countrylanguage
+where country_code = 'IND'
+order by percentage desc"
+dbmsf26-Morilloa,5,PASS,,"select count(*) from countrylanguage
+where language = 'English'"
+dbmsf26-Morilloa,6,FAIL,"expected 1 row(s), got 1 row(s)","select name, population/surface_area as density
+from country
+where code = 'USA'"
+dbmsf26-Morilloa,7,PASS,,"select sum(population) from city
+where country_code = 'USA'"
+dbmsf26-Morilloa,8,PASS,,"select avg(life_expectancy) from country
+where continent = 'Europe'"
+dbmsf-reidyz,1,MISSING_FILE,,
+dbmsf-reidyz,2,MISSING_FILE,,
+dbmsf-reidyz,3,MISSING_FILE,,
+dbmsf-reidyz,4,MISSING_FILE,,
+dbmsf-reidyz,5,MISSING_FILE,,
+dbmsf-reidyz,6,MISSING_FILE,,
+dbmsf-reidyz,7,MISSING_FILE,,
+dbmsf-reidyz,8,MISSING_FILE,,
+Wrong_one_aswell,1,MISSING_FILE,,
+Wrong_one_aswell,2,MISSING_FILE,,
+Wrong_one_aswell,3,MISSING_FILE,,
+Wrong_one_aswell,4,MISSING_FILE,,
+Wrong_one_aswell,5,MISSING_FILE,,
+Wrong_one_aswell,6,MISSING_FILE,,
+Wrong_one_aswell,7,MISSING_FILE,,
+Wrong_one_aswell,8,MISSING_FILE,,
+dbmsf26-JoshuaWillJones,1,PASS,,"select population 
+from country 
+where name = 'United States'"
+dbmsf26-JoshuaWillJones,2,PASS,,"select code
+from country 
+where name = 'India'"
+dbmsf26-JoshuaWillJones,3,PASS,,"select language
+from countrylanguage
+where country_code = 'IND'
+order by language"
+dbmsf26-JoshuaWillJones,4,FAIL,"expected 12 row(s), got 12 row(s)","select language
+from countrylanguage
+where country_code = 'IND'
+order by percentage"
+dbmsf26-JoshuaWillJones,5,PASS,,"select COUNT(*)
+from countrylanguage
+where language = 'English'"
+dbmsf26-JoshuaWillJones,6,PASS,,"select population/surface_area as Population_Density
+from country
+where name = 'United States'"
+dbmsf26-JoshuaWillJones,7,PASS,,"select SUM(population)
+from city
+where country_code = 'USA'"
+dbmsf26-JoshuaWillJones,8,PASS,,"select AVG(life_expectancy)
+from country
+where continent = 'Europe'"
+dbmsf26-kubisekl,1,MISSING_FILE,,
+dbmsf26-kubisekl,2,MISSING_FILE,,
+dbmsf26-kubisekl,3,MISSING_FILE,,
+dbmsf26-kubisekl,4,MISSING_FILE,,
+dbmsf26-kubisekl,5,MISSING_FILE,,
+dbmsf26-kubisekl,6,MISSING_FILE,,
+dbmsf26-kubisekl,7,MISSING_FILE,,
+dbmsf26-kubisekl,8,MISSING_FILE,,
+kerrW,1,PASS,,SELECT population FROM Country WHERE code = 'USA'
+kerrW,2,PASS,,SELECT code FROM Country WHERE name = 'India'
+kerrW,3,FAIL,"expected 12 row(s), got 12 row(s)",SELECT language FROM countrylanguage WHERE country_code = 'IND' ORDER BY language DESC
+kerrW,4,FAIL,"expected 12 row(s), got 12 row(s)",SELECT language FROM countrylanguage WHERE country_code = 'IND' ORDER BY percentage DESC
+kerrW,5,PASS,,SELECT COUNT(*) FROM countrylanguage WHERE language = 'English'
+kerrW,6,PASS,,SELECT population / surface_area FROM country WHERE code = 'USA'
+kerrW,7,PASS,,SELECT SUM(population) FROM city WHERE country_code = 'USA'
+kerrW,8,PASS,,SELECT AVG(life_expectancy) FROM country WHERE continent = 'Europe'
+dbms-amacker,1,MISSING_FILE,,
+dbms-amacker,2,MISSING_FILE,,
+dbms-amacker,3,MISSING_FILE,,
+dbms-amacker,4,MISSING_FILE,,
+dbms-amacker,5,MISSING_FILE,,
+dbms-amacker,6,MISSING_FILE,,
+dbms-amacker,7,MISSING_FILE,,
+dbms-amacker,8,MISSING_FILE,,
+RohrbachJ,1,PASS,,SELECT population from country where name = 'United States'
+RohrbachJ,2,PASS,,select code from country WHERE name = 'India'
+RohrbachJ,3,PASS,,select LANGUAGE from countrylanguage where country_code = 'IND' ORDER BY language
+RohrbachJ,4,FAIL,"expected 12 row(s), got 12 row(s)",select LANGUAGE from countrylanguage where country_code = 'IND' ORDER BY percentage DESC
+RohrbachJ,5,PASS,,select COUNT(*) from countrylanguage where language = 'English'
+RohrbachJ,6,FAIL,"expected 1 row(s), got 0 row(s)",select population / surface_area from country where name = 'USA'
+RohrbachJ,7,PASS,,select SUM(population) from city where country_code = 'USA'
+RohrbachJ,8,PASS,,select AVG(Life_expectancy) from country where continent = 'Europe'
+dbmsf26-sekoln,1,MISSING_FILE,,
+dbmsf26-sekoln,2,MISSING_FILE,,
+dbmsf26-sekoln,3,MISSING_FILE,,
+dbmsf26-sekoln,4,MISSING_FILE,,
+dbmsf26-sekoln,5,MISSING_FILE,,
+dbmsf26-sekoln,6,MISSING_FILE,,
+dbmsf26-sekoln,7,MISSING_FILE,,
+dbmsf26-sekoln,8,MISSING_FILE,,
+dbmsf26-lezamaj,1,FAIL,"expected 1 row(s), got 1 row(s)","SELECT name, population FROM country WHERE code = 'USA'"
+dbmsf26-lezamaj,2,FAIL,"expected 1 row(s), got 1 row(s)","SELECT name, code FROM country WHERE name = 'India'"
+dbmsf26-lezamaj,3,FAIL,"expected 12 row(s), got 12 row(s)","SELECT country_code, language FROM countrylanguage WHERE country_code = 'IND'"
+dbmsf26-lezamaj,4,FAIL,"expected 12 row(s), got 12 row(s)","SELECT country_code, language FROM countrylanguage WHERE country_code = 'IND' ORDER BY PERCENTAGE DESC"
+dbmsf26-lezamaj,5,PASS,,SELECT COUNT(*) FROM countrylanguage WHERE language = 'English'
+dbmsf26-lezamaj,6,FAIL,"expected 1 row(s), got 1 row(s)","SELECT name, population/surface_area AS population_density FROM country WHERE code = 'USA'"
+dbmsf26-lezamaj,7,PASS,,SELECT SUM(population) FROM city WHERE country_code = 'USA'
+dbmsf26-lezamaj,8,PASS,,SELECT AVG(life_expectancy) FROM country WHERE continent = 'Europe'
+hallb,1,PASS,,SELECT Population FROM Country WHERE code = 'USA'
+hallb,2,PASS,,SELECT Code FROM Country WHERE name = 'India'
+hallb,3,PASS,,SELECT Language FROM CountryLanguage WHERE Country_Code = 'IND' ORDER BY Language
+hallb,4,PASS,,"SELECT Language, Percentage FROM CountryLanguage WHERE Country_Code = 'IND' ORDER BY percentage DESC"
+hallb,5,PASS,,SELECT Count(*) FROM CountryLanguage WHERE language = 'English'
+hallb,6,PASS,,SELECT Population/surface_area AS Population_Density FROM Country WHERE code = 'USA'
+hallb,7,PASS,,SELECT Sum(Population) FROM City WHERE Country_Code = 'USA'
+hallb,8,PASS,,SELECT AVG(Life_expectancy) FROM Country WHERE Continent = 'Europe'
+dbmsf26-kellemana,1,PASS,,SELECT Population FROM Country WHERE CODE = 'USA'
+dbmsf26-kellemana,2,PASS,,SELECT Code FROM Country WHERE Name = 'India'
+dbmsf26-kellemana,3,PASS,,SELECT language FROM countrylanguage WHERE country_code = 'IND'
+dbmsf26-kellemana,4,PASS,,"SELECT language, percentage FROM countrylanguage WHERE country_code = 'IND' ORDER BY percentage DESC"
+dbmsf26-kellemana,5,PASS,,SELECT COUNT(*) FROM countrylanguage WHERE language = 'English'
+dbmsf26-kellemana,6,FAIL,"expected 1 row(s), got 1 row(s)","SELECT name, population/surface_area AS Population_Density FROM country WHERE Code = 'USA'"
+dbmsf26-kellemana,7,PASS,,SELECT SUM(population) FROM CITY WHERE country_code = 'USA'
+dbmsf26-kellemana,8,PASS,,SELECT AVG(life_expectancy) FROM country WHERE continent = 'Europe'
+first,1,MISSING_FILE,,
+first,2,MISSING_FILE,,
+first,3,MISSING_FILE,,
+first,4,MISSING_FILE,,
+first,5,MISSING_FILE,,
+first,6,MISSING_FILE,,
+first,7,MISSING_FILE,,
+first,8,MISSING_FILE,,
+bmsf26-DemarestR,1,PASS,,SELECT Population FROM country WHERE Code = 'USA'
+bmsf26-DemarestR,2,FAIL,"expected 1 row(s), got 12 row(s)",SELECT Language FROM countrylanguage WHERE country_code = 'IND' ORDER BY Language
+bmsf26-DemarestR,3,FAIL,"expected 12 row(s), got 12 row(s)","Select Language, Percentage From countrylanguage WHERE country_code = 'IND' ORDER BY Percentage DESC"
+bmsf26-DemarestR,4,FAIL,"expected 12 row(s), got 1 row(s)",Select COUNT(*) FROM countrylanguage WHERE Language = 'English'
+bmsf26-DemarestR,5,FAIL,"expected 1 row(s), got 1 row(s)",SELECT Population / Surface_Area AS Population_Density FROM Country WHERE Code = 'USA'
+bmsf26-DemarestR,6,FAIL,"expected 1 row(s), got 1 row(s)",SELECT SUM(population) AS Total_Usa_City_Population FROM city WHERE country_code = 'USA'
+bmsf26-DemarestR,7,FAIL,"expected 1 row(s), got 1 row(s)",SELECT AVG(life_expectancy) AS Average_Life_Expectancy FROM country WHERE continent = 'Europe'
+bmsf26-DemarestR,8,FAIL,"expected 1 row(s), got 41 row(s)",SELECT name FROM country WHERE name ILIKE '%and%' ORDER BY name
+dbmsf26-mostafaa,1,MISSING_FILE,,
+dbmsf26-mostafaa,2,MISSING_FILE,,
+dbmsf26-mostafaa,3,MISSING_FILE,,
+dbmsf26-mostafaa,4,MISSING_FILE,,
+dbmsf26-mostafaa,5,MISSING_FILE,,
+dbmsf26-mostafaa,6,MISSING_FILE,,
+dbmsf26-mostafaa,7,MISSING_FILE,,
+dbmsf26-mostafaa,8,MISSING_FILE,,
+dbmsf26-empty,1,MISSING_FILE,,
+dbmsf26-empty,2,MISSING_FILE,,
+dbmsf26-empty,3,MISSING_FILE,,
+dbmsf26-empty,4,MISSING_FILE,,
+dbmsf26-empty,5,MISSING_FILE,,
+dbmsf26-empty,6,MISSING_FILE,,
+dbmsf26-empty,7,MISSING_FILE,,
+dbmsf26-empty,8,MISSING_FILE,,
+Jesus-Rodriguez,1,PASS,,select population from country where code ='USA'
+Jesus-Rodriguez,2,PASS,,SELECT Code FROM country WHERE Name = 'India'
+Jesus-Rodriguez,3,PASS,,Select language From countrylanguage Where country_Code= 'IND' order by language
+Jesus-Rodriguez,4,PASS,,"Select language, percentage From countrylanguage where country_code= 'IND' order by percentage desc"
+Jesus-Rodriguez,5,PASS,,select count(*) from countrylanguage where language = 'English'
+Jesus-Rodriguez,6,PASS,,Select population / surface_area AS population_density from country where code = 'USA'
+Jesus-Rodriguez,7,PASS,,select sum(population) as total_city_population From city where country_code='USA'
+Jesus-Rodriguez,8,PASS,,SELECT AVG(life_expectancy) AS avg_life_expectancy FROM world.country WHERE continent = 'Europe'
+dbmsf26-dayouba02,1,MISSING_FILE,,
+dbmsf26-dayouba02,2,MISSING_FILE,,
+dbmsf26-dayouba02,3,MISSING_FILE,,
+dbmsf26-dayouba02,4,MISSING_FILE,,
+dbmsf26-dayouba02,5,MISSING_FILE,,
+dbmsf26-dayouba02,6,MISSING_FILE,,
+dbmsf26-dayouba02,7,MISSING_FILE,,
+dbmsf26-dayouba02,8,MISSING_FILE,,
+bmsf26-diallomx,1,REJECTED,,Set search_path TO world
+bmsf26-diallomx,2,FAIL,"expected 1 row(s), got 1 row(s)",Select population from Country where code = 'USA'
+bmsf26-diallomx,3,FAIL,"expected 12 row(s), got 1 row(s)",Select code from country where name like '%India %'
+bmsf26-diallomx,4,FAIL,"expected 12 row(s), got 12 row(s)","Select  LANGUAGE
+ from countrylanguage
+ where country_code = 'IND'"
+bmsf26-diallomx,5,FAIL,"expected 1 row(s), got 12 row(s)","Select Language, percentage
+ from countrylanguage
+ where country_code = 'IND'
+ order by percentage DESC"
+bmsf26-diallomx,6,FAIL,"expected 1 row(s), got 1 row(s)","Select count(country_code) 
+ from countrylanguage
+ where language = 'English'"
+bmsf26-diallomx,7,FAIL,"expected 1 row(s), got 1 row(s)",Select population/surface_area from Country where code = 'USA'
+bmsf26-diallomx,8,FAIL,"expected 1 row(s), got 1 row(s)","Select SUM (POPULATION)
+ from city 
+ where country_code= 'USA'"
+dbmsf26-AeidenT-byte,1,MISSING_FILE,,
+dbmsf26-AeidenT-byte,2,MISSING_FILE,,
+dbmsf26-AeidenT-byte,3,MISSING_FILE,,
+dbmsf26-AeidenT-byte,4,MISSING_FILE,,
+dbmsf26-AeidenT-byte,5,MISSING_FILE,,
+dbmsf26-AeidenT-byte,6,MISSING_FILE,,
+dbmsf26-AeidenT-byte,7,MISSING_FILE,,
+dbmsf26-AeidenT-byte,8,MISSING_FILE,,
+dbmsf26-coleyj02.-,1,MISSING_FILE,,
+dbmsf26-coleyj02.-,2,MISSING_FILE,,
+dbmsf26-coleyj02.-,3,MISSING_FILE,,
+dbmsf26-coleyj02.-,4,MISSING_FILE,,
+dbmsf26-coleyj02.-,5,MISSING_FILE,,
+dbmsf26-coleyj02.-,6,MISSING_FILE,,
+dbmsf26-coleyj02.-,7,MISSING_FILE,,
+dbmsf26-coleyj02.-,8,MISSING_FILE,,
+williamst06,1,REJECTED,,set search_path TO world
+williamst06,2,FAIL,"expected 1 row(s), got 1 row(s)",select population from country where code = 'USA'
+williamst06,3,FAIL,"expected 12 row(s), got 239 row(s)",select * from country
+williamst06,4,FAIL,"expected 12 row(s), got 1 row(s)",select code from country where name = 'India'
+williamst06,5,FAIL,"expected 1 row(s), got 12 row(s)",select language from countrylanguage where country_code = 'IND'
+williamst06,6,FAIL,"expected 1 row(s), got 12 row(s)","select language,percentage from countrylanguage where country_code = 'IND' order by percentage desc"
+williamst06,7,FAIL,"expected 1 row(s), got 12 row(s)","select language,percentage from countrylanguage where country_code = 'IND' order by percentage desc"
+williamst06,8,FAIL,"expected 1 row(s), got 1 row(s)",select population/surface_area from country where code = 'USA'
+Saeeda,1,FAIL,"expected 1 row(s), got 1 row(s)","SELECT population, name From country Where CODE = 'USA'"
+Saeeda,2,FAIL,"expected 1 row(s), got 1 row(s)","SELECT code, name from country where name = 'India'"
+Saeeda,3,FAIL,"expected 12 row(s), got 12 row(s)",select * from countrylanguage where country_code = 'IND' order by language
+Saeeda,4,FAIL,"expected 12 row(s), got 12 row(s)",select * from countrylanguage where country_code = 'IND' order by percentage DESC
+Saeeda,5,PASS,,Select Count(*) from countrylanguage where language = 'English'
+Saeeda,6,FAIL,"expected 1 row(s), got 1 row(s)","Select population/surface_area as Density, name from country where code = 'USA'"
+Saeeda,7,PASS,,Select SUM(population) from city where country_code = 'USA'
+Saeeda,8,FAIL,"expected 1 row(s), got 1 row(s)",select SUM(life_expectancy)/count(country) as Average from country where continent = 'Europe'
+dbmsf26-trigor,1,PASS,,Select population from country where code = 'USA'
+dbmsf26-trigor,2,PASS,,Select code from country where name = 'India'
+dbmsf26-trigor,3,PASS,,Select language from countrylanguage where country_code = 'IND'
+dbmsf26-trigor,4,FAIL,"expected 12 row(s), got 12 row(s)",Select language from countrylanguage where country_code = 'IND' order by percentage DESC
+dbmsf26-trigor,5,PASS,,Select Count(language) from countrylanguage where language = 'English'
+dbmsf26-trigor,6,PASS,,Select population/surface_area from country where code = 'USA'
+dbmsf26-trigor,7,PASS,,Select sum(population) from city where country_code = 'USA'
+dbmsf26-trigor,8,PASS,,Select avg(life_expectancy) from country where continent = 'Europe'
+pipichm,1,MISSING_FILE,,
+pipichm,2,MISSING_FILE,,
+pipichm,3,MISSING_FILE,,
+pipichm,4,MISSING_FILE,,
+pipichm,5,MISSING_FILE,,
+pipichm,6,MISSING_FILE,,
+pipichm,7,MISSING_FILE,,
+pipichm,8,MISSING_FILE,,
+dbmsf26-WeinerD,1,FAIL,"expected 1 row(s), got 1 row(s)","SELECT Code, Name, Population FROM Country where Code = 'USA'"
+dbmsf26-WeinerD,2,FAIL,"expected 1 row(s), got 1 row(s)","SELECT Code, Name FROM Country WHERE Name = 'India'"
+dbmsf26-WeinerD,3,PASS,,SELECT language FROM countrylanguage WHERE country_code = 'IND'
+dbmsf26-WeinerD,4,PASS,,"SELECT language, percentage FROM countrylanguage WHERE country_code = 'IND' ORDER BY Percentage DESC"
+dbmsf26-WeinerD,5,PASS,,SELECT count(*) FROM countrylanguage WHERE language = 'English'
+dbmsf26-WeinerD,6,PASS,,SELECT population/surface_area AS population_density FROM country WHERE Code = 'USA'
+dbmsf26-WeinerD,7,PASS,,SELECT sum(population) FROM city where country_code = 'USA'
+dbmsf26-WeinerD,8,PASS,,SELECT avg(life_expectancy) FROM country where continent = 'Europe'
+dbmsf26-wagenheimj,1,PASS,,SELECT Population FROM Country WHERE name = 'United States'
+dbmsf26-wagenheimj,2,PASS,,SELECT Code FROM Country WHERE name = 'India'
+dbmsf26-wagenheimj,3,PASS,,SELECT Language FROM CountryLanguage where country_code = 'IND' ORDER BY LANGUAGE
+dbmsf26-wagenheimj,4,PASS,,"SELECT Language, Percentage FROM CountryLanguage where country_code = 'IND' ORDER BY Percentage DESC"
+dbmsf26-wagenheimj,5,PASS,,SELECT COUNT(*) FROM CountryLanguage WHERE Language = 'English'
+dbmsf26-wagenheimj,6,PASS,,SELECT Population/Surface_Area AS Population_Density FROM Country WHERE name = 'United States'
+dbmsf26-wagenheimj,7,PASS,,SELECT SUM(Population) FROM City WHERE Country_Code = 'USA'
+dbmsf26-wagenheimj,8,PASS,,SELECT AVG(Life_Expectancy) FROM Country WHERE continent = 'Europe'
+dbmsf26-pipichm,1,REJECTED,,"\\\\ClassWork
+SELECT * FROM COUNTRY"
+dbmsf26-pipichm,2,FAIL,"expected 1 row(s), got 239 row(s)","SELECT Code, Name FROM Country"
+dbmsf26-pipichm,3,FAIL,"expected 12 row(s), got 239 row(s)","SELECT Code, Name FROM Country ORDER BY Name"
+dbmsf26-pipichm,4,FAIL,"expected 12 row(s), got 239 row(s)","SELECT Code, Name FROM Country ORDER BY Population DESC"
+dbmsf26-pipichm,5,FAIL,"expected 1 row(s), got 1 row(s)",SELECT Life_Expectancy FROM Country WHERE CODE = 'USA'
+dbmsf26-pipichm,6,FAIL,"expected 1 row(s), got 5 row(s)",SELECT * FROM Country WHERE Life_Expectancy > 80
+dbmsf26-pipichm,7,FAIL,"expected 1 row(s), got 1 row(s)",Select count(*) from Country where Life_Expectancy >80
+dbmsf26-pipichm,8,FAIL,"expected 1 row(s), got 5 row(s)","select name, gnp/population as gnp_per_capita from country where life_expectancy > 80"
+Wrong_one,1,MISSING_FILE,,
+Wrong_one,2,MISSING_FILE,,
+Wrong_one,3,MISSING_FILE,,
+Wrong_one,4,MISSING_FILE,,
+Wrong_one,5,MISSING_FILE,,
+Wrong_one,6,MISSING_FILE,,
+Wrong_one,7,MISSING_FILE,,
+Wrong_one,8,MISSING_FILE,,
+dbmsf26-mostafaaa,1,PASS,,SELECT Population FROM Country WHERE Code = 'USA'
+dbmsf26-mostafaaa,2,PASS,,SELECT Code from country where name = 'India'
+dbmsf26-mostafaaa,3,PASS,,SELECT Language from countrylanguage WHERE country_code = 'IND' ORDER BY language
+dbmsf26-mostafaaa,4,FAIL,"expected 12 row(s), got 12 row(s)",SElECT Language from countrylanguage WHERE country_code = 'IND' ORDER BY percentage DESC
+dbmsf26-mostafaaa,5,PASS,,SELECT COUNT(*) from countrylanguage WHERE Language = 'English'
+dbmsf26-mostafaaa,6,PASS,,SELECT Population / surface_area FROM country WHERE code = 'USA'
+dbmsf26-mostafaaa,7,PASS,,SELECT SUM(Population) from city WHERE country_code = 'USA'
+dbmsf26-mostafaaa,8,PASS,,SELECT AVG(Life_Expectancy) FROM country WHERE continent = 'Europe'
+dbmsf26-coleyj02.,1,MISSING_FILE,,
+dbmsf26-coleyj02.,2,MISSING_FILE,,
+dbmsf26-coleyj02.,3,MISSING_FILE,,
+dbmsf26-coleyj02.,4,MISSING_FILE,,
+dbmsf26-coleyj02.,5,MISSING_FILE,,
+dbmsf26-coleyj02.,6,MISSING_FILE,,
+dbmsf26-coleyj02.,7,MISSING_FILE,,
+dbmsf26-coleyj02.,8,MISSING_FILE,,
+dbmsf26-yasira3,1,FAIL,"expected 1 row(s), got 2 row(s)",SELECT * FROM country WHERE name LIKE '%United States%'
+dbmsf26-yasira3,2,FAIL,"expected 1 row(s), got 2 row(s)",SELECT * FROM country WHERE name LIKE '%India%'
+dbmsf26-yasira3,3,FAIL,"expected 12 row(s), got 239 row(s)",SELECT * FROM country
+dbmsf26-yasira3,4,SQL_ERROR,"syntax error at or near ""SELECT"" LINE 4: SELECT * FROM countrylanguage WHERE country_code LIKE '%IND%...         ^ ","SELECT * FROM countrylanguage WHERE country_code LIKE '%IND%'
+
+
+SELECT * FROM countrylanguage WHERE country_code LIKE '%IND%'
+ORDER BY percentage DESC"
+dbmsf26-yasira3,5,FAIL,"expected 1 row(s), got 1 row(s)",SELECT COUNT(*) FROM countrylanguage WHERE language LIKE '%English%'
+dbmsf26-yasira3,6,FAIL,"expected 1 row(s), got 1 row(s)",SELECT AVG(population/surface_area) FROM country
+dbmsf26-yasira3,7,PASS,,SELECT SUM(population) FROM city WHERE country_code LIKE '%USA%'
+dbmsf26-yasira3,8,PASS,,SELECT AVG(life_expectancy) from country WHERE continent LIKE '%Europe%'
+dbmsf26-Santanaa,1,MISSING_FILE,,
+dbmsf26-Santanaa,2,MISSING_FILE,,
+dbmsf26-Santanaa,3,MISSING_FILE,,
+dbmsf26-Santanaa,4,MISSING_FILE,,
+dbmsf26-Santanaa,5,MISSING_FILE,,
+dbmsf26-Santanaa,6,MISSING_FILE,,
+dbmsf26-Santanaa,7,MISSING_FILE,,
+dbmsf26-Santanaa,8,MISSING_FILE,,
+dbmsf2-reidyz,1,FAIL,"expected 1 row(s), got 2 row(s)",SELECT * FROM country WHERE name LIKE '%United States%'
+dbmsf2-reidyz,2,REJECTED,,"278357000
+
+SELECT * FROM country WHERE name LIKE '%Indi%'"
+dbmsf2-reidyz,3,REJECTED,,"IND
+
+SELECT * FROM countrylanguage WHERE country_code LIKE '%IND%'
+ORDER BY language ASC"
+dbmsf2-reidyz,4,FAIL,"expected 12 row(s), got 12 row(s)","SELECT * FROM countrylanguage WHERE country_code LIKE '%IND%'
+ORDER BY percentage DESC"
+dbmsf2-reidyz,5,FAIL,"expected 1 row(s), got 1 row(s)",SELECT COUNT(*) FROM countrylanguage WHERE language LIKE '%Eng%'
+dbmsf2-reidyz,6,REJECTED,,"77
+
+SELECT AVG(population/surface_area) FROM country"
+dbmsf2-reidyz,7,REJECTED,,"409.859185816286724056434686
+
+SELECT SUM(population) FROM city WHERE country_code LIKE '%USA%'"
+dbmsf2-reidyz,8,REJECTED,,"78625774
+
+ SELECT AVG(Life_Expectancy) FROM country WHERE continent LIKE '%Europe%'"
+dbmsf26-dayouba03,1,PASS,,select population from country where code = 'USA'
+dbmsf26-dayouba03,2,PASS,,select code from country where name = 'India'
+dbmsf26-dayouba03,3,FAIL,"expected 12 row(s), got 12 row(s)",select * from countrylanguage where country_code = 'IND' order by language asc
+dbmsf26-dayouba03,4,FAIL,"expected 12 row(s), got 12 row(s)",select * from countrylanguage where country_code = 'IND' order by percentage desc
+dbmsf26-dayouba03,5,PASS,,select count(*) from countrylanguage where language = 'English'
+dbmsf26-dayouba03,6,PASS,,select population/surface_area as populationdensity from country where code = 'USA'
+dbmsf26-dayouba03,7,PASS,,select SUM(population) from city where country_code = 'USA'
+dbmsf26-dayouba03,8,PASS,,select AVG(life_expectancy) from country where continent = 'Europe'
+dbms-amacker2,1,MISSING_FILE,,
+dbms-amacker2,2,MISSING_FILE,,
+dbms-amacker2,3,MISSING_FILE,,
+dbms-amacker2,4,MISSING_FILE,,
+dbms-amacker2,5,MISSING_FILE,,
+dbms-amacker2,6,MISSING_FILE,,
+dbms-amacker2,7,MISSING_FILE,,
+dbms-amacker2,8,MISSING_FILE,,
+petrej-moravian.edu,1,MISSING_FILE,,
+petrej-moravian.edu,2,MISSING_FILE,,
+petrej-moravian.edu,3,MISSING_FILE,,
+petrej-moravian.edu,4,MISSING_FILE,,
+petrej-moravian.edu,5,MISSING_FILE,,
+petrej-moravian.edu,6,MISSING_FILE,,
+petrej-moravian.edu,7,MISSING_FILE,,
+petrej-moravian.edu,8,MISSING_FILE,,
+dbmsf26-alzoubim,1,PASS,,SELECT population FROM country WHERE code = 'USA'
+dbmsf26-alzoubim,2,PASS,,SELECT code FROM country WHERE name = 'India'
+dbmsf26-alzoubim,3,PASS,,SELECT language FROM countrylanguage WHERE country_code = 'IND' ORDER BY language
+dbmsf26-alzoubim,4,PASS,,"SELECT language, percentage FROM countrylanguage WHERE country_code = 'IND' ORDER BY percentage DESC"
+dbmsf26-alzoubim,5,PASS,,SELECT COUNT(*) FROM countrylanguage WHERE language = 'English'
+dbmsf26-alzoubim,6,PASS,,SELECT population / surface_area AS population_density FROM country WHERE code = 'USA'
+dbmsf26-alzoubim,7,PASS,,SELECT SUM(population) FROM city WHERE country_code = 'USA'
+dbmsf26-alzoubim,8,PASS,,SELECT AVG(life_expectancy) FROM country WHERE continent = 'Europe'
+dbmsf26-whitek09-design,1,MISSING_FILE,,
+dbmsf26-whitek09-design,2,MISSING_FILE,,
+dbmsf26-whitek09-design,3,MISSING_FILE,,
+dbmsf26-whitek09-design,4,MISSING_FILE,,
+dbmsf26-whitek09-design,5,MISSING_FILE,,
+dbmsf26-whitek09-design,6,MISSING_FILE,,
+dbmsf26-whitek09-design,7,MISSING_FILE,,
+dbmsf26-whitek09-design,8,MISSING_FILE,,
+dbmsf26-johnsonj06,1,MISSING_FILE,,
+dbmsf26-johnsonj06,2,MISSING_FILE,,
+dbmsf26-johnsonj06,3,MISSING_FILE,,
+dbmsf26-johnsonj06,4,MISSING_FILE,,
+dbmsf26-johnsonj06,5,MISSING_FILE,,
+dbmsf26-johnsonj06,6,MISSING_FILE,,
+dbmsf26-johnsonj06,7,MISSING_FILE,,
+dbmsf26-johnsonj06,8,MISSING_FILE,,
+petrej,1,PASS,,select population from country where code = 'USA'
+petrej,2,PASS,,select code from country where name = 'India'
+petrej,3,PASS,,select language from countrylanguage where country_code = 'IND' order by language
+petrej,4,FAIL,"expected 12 row(s), got 12 row(s)",select language from countrylanguage where country_code = 'IND' order by percentage desc
+petrej,5,PASS,,select count(*) from countrylanguage where language = 'English'
+petrej,6,PASS,,select population / surface_area from country where code = 'USA'
+petrej,7,PASS,,select sum(population) from city where country_code = 'USA'
+petrej,8,PASS,,select avg(Life_Expectancy) from country where continent = 'Europe'
+dbmsf26-yJarrahD,1,MISSING_FILE,,
+dbmsf26-yJarrahD,2,MISSING_FILE,,
+dbmsf26-yJarrahD,3,MISSING_FILE,,
+dbmsf26-yJarrahD,4,MISSING_FILE,,
+dbmsf26-yJarrahD,5,MISSING_FILE,,
+dbmsf26-yJarrahD,6,MISSING_FILE,,
+dbmsf26-yJarrahD,7,MISSING_FILE,,
+dbmsf26-yJarrahD,8,MISSING_FILE,,
+dbmsf26-itchybarn,1,MISSING_FILE,,
+dbmsf26-itchybarn,2,MISSING_FILE,,
+dbmsf26-itchybarn,3,MISSING_FILE,,
+dbmsf26-itchybarn,4,MISSING_FILE,,
+dbmsf26-itchybarn,5,MISSING_FILE,,
+dbmsf26-itchybarn,6,MISSING_FILE,,
+dbmsf26-itchybarn,7,MISSING_FILE,,
+dbmsf26-itchybarn,8,MISSING_FILE,,
+dbms-f26-itchybarn,1,MISSING_FILE,,
+dbms-f26-itchybarn,2,MISSING_FILE,,
+dbms-f26-itchybarn,3,MISSING_FILE,,
+dbms-f26-itchybarn,4,MISSING_FILE,,
+dbms-f26-itchybarn,5,MISSING_FILE,,
+dbms-f26-itchybarn,6,MISSING_FILE,,
+dbms-f26-itchybarn,7,MISSING_FILE,,
+dbms-f26-itchybarn,8,MISSING_FILE,,

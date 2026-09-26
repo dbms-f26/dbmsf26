@@ -1,0 +1,10 @@
+SELECT Population FROM Country WHERE Code = 'USA';
+SELECT Code from country where name = 'India';
+SELECT Language from countrylanguage WHERE country_code = 'IND' ORDER BY language;
+SElECT Language from countrylanguage WHERE country_code = 'IND' ORDER BY percentage DESC;
+SELECT COUNT(*) from countrylanguage WHERE Language = 'English';
+SELECT Population / surface_area FROM country WHERE code = 'USA';
+SELECT SUM(Population) from city WHERE country_code = 'USA';
+SELECT AVG(Life_Expectancy) FROM country WHERE continent = 'Europe';
+SELECT name from country where name LIKE '%and%';
+SELECT name from country where name LIKE '%And%';

@@ -1,0 +1,11 @@
+SET search_path TO world;
+SELECT population, name From country Where CODE = 'USA';
+SELECT code, name from country where name = 'India';
+select * from countrylanguage where country_code = 'IND' order by language;
+select * from countrylanguage where country_code = 'IND' order by percentage DESC;
+Select Count(*) from countrylanguage where language = 'English';
+Select population/surface_area as Density, name from country where code = 'USA'; 
+Select SUM(population) from city where country_code = 'USA';
+select SUM(life_expectancy)/count(country) as Average from country where continent = 'Europe';
+Select * from country where name like '%and%';
+Select * from country where name like 'And%';

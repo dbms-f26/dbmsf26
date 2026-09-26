@@ -57,6 +57,8 @@ import base64
 import argparse
 import psycopg2
 import urllib.request
+import urllib.error
+import urllib.parse
 import json
 import subprocess
 from datetime import datetime
@@ -227,6 +229,53 @@ def fetch_file_from_repo(org, repo, path, token):
     return content
 
 
+def list_sql_files_in_repo(org, repo, token):
+    """
+    Returns a list of .sql file paths anywhere in `org/repo`, including
+    subfolders (e.g. "sql/query1.sql"), using GitHub's recursive Git Trees
+    API rather than the one-level-at-a-time contents API.
+    Returns an empty list if none are found, or if the repo/branch can't be
+    read for any reason (e.g. an empty repo).
+    """
+    try:
+        repo_info = github_api_get(f"/repos/{org}/{repo}", token)
+        branch = repo_info.get("default_branch", "main")
+    except urllib.error.HTTPError:
+        branch = "main"
+
+    try:
+        tree = github_api_get(f"/repos/{org}/{repo}/git/trees/{branch}?recursive=1", token)
+    except urllib.error.HTTPError:
+        return []
+
+    if "tree" not in tree:
+        return []
+    return sorted(
+        item["path"] for item in tree["tree"]
+        if item.get("type") == "blob" and item["path"].endswith(".sql")
+    )
+
+
+def get_file_last_modified(org, repo, path, token):
+    """
+    Returns the ISO 8601 UTC timestamp (as a string, e.g.
+    "2026-09-20T14:32:10Z") of the most recent commit that touched `path`
+    in `org/repo`, or None if that can't be determined (e.g. the file has
+    no commit history GitHub can find, or the API call fails).
+    """
+    try:
+        encoded_path = urllib.parse.quote(path)
+        data = github_api_get(f"/repos/{org}/{repo}/commits?path={encoded_path}&per_page=1", token)
+    except urllib.error.HTTPError:
+        return None
+    if not data:
+        return None
+    try:
+        return data[0]["commit"]["committer"]["date"]
+    except (KeyError, IndexError, TypeError):
+        return None
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Grade a SQL file collected from every student repo in a GitHub organization."
@@ -284,17 +333,43 @@ def main():
     print(f"This run's files will be saved under: {run_dir}/\n")
 
     results = []  # rows for the CSV: student, question, status, detail
+    last_modified_by_student = {}  # student -> ISO timestamp string, or "" if no file was graded
 
     for repo in repos:
         student = repo
         print(f"--- {repo} ---")
+        path_used = file_to_grade
         content = fetch_file_from_repo(GITHUB_ORG, repo, file_to_grade, GITHUB_TOKEN)
 
         if content is None:
             print(f"  {file_to_grade} not found.")
-            for qnum in answer_key:
-                results.append([student, qnum, "MISSING_FILE", "", ""])
-            continue
+            sql_files = list_sql_files_in_repo(GITHUB_ORG, repo, GITHUB_TOKEN)
+            if sql_files:
+                print(f"  .sql files found in this repo: {', '.join(sql_files)}")
+            else:
+                print("  No .sql files found anywhere in this repo.")
+
+            chosen = input(
+                "  Enter a path to grade instead (e.g. sql/query1.sql), or press Enter to mark as missing: "
+            ).strip()
+
+            if chosen:
+                content = fetch_file_from_repo(GITHUB_ORG, repo, chosen, GITHUB_TOKEN)
+                if content is None:
+                    print(f"  '{chosen}' not found in this repo either -- marking as missing.")
+                else:
+                    path_used = chosen
+
+            if content is None:
+                for qnum in answer_key:
+                    results.append([student, qnum, "MISSING_FILE", "", ""])
+                last_modified_by_student[student] = ""
+                continue
+
+        # Look up when the graded file was actually last committed -- this
+        # reflects real edit history, not just when the repo was created.
+        last_modified = get_file_last_modified(GITHUB_ORG, repo, path_used, GITHUB_TOKEN)
+        last_modified_by_student[student] = last_modified or "unknown"
 
         # Save a copy of exactly what was graded, in this run's subfolder.
         # This is your audit trail: what the student actually submitted,
@@ -343,11 +418,12 @@ def main():
     summary_path = os.path.join(run_dir, "summary_results.csv")
     with open(summary_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["student", "total", "passed", "results"])
+        writer.writerow(["student", "total", "passed", "results", "last_modified"])
         for student, statuses in summary.items():
             total = len(statuses)
             passed = sum(1 for s in statuses if s == "PASS")
-            writer.writerow([student, total, passed, ", ".join(statuses)])
+            last_modified = last_modified_by_student.get(student, "")
+            writer.writerow([student, total, passed, ", ".join(statuses), last_modified])
     print(f"Summary written to {summary_path}")
 
     csv_path = os.path.join(run_dir, "grading_results.csv")

@@ -2,7 +2,7 @@
 """
 grade_queries.py
 
-Collects a `queries.sql` file from every student repo in a GitHub organization,
+Collects a sql file from every student repo in a GitHub organization,
 runs each student's SELECT queries against a reference PostgreSQL database,
 and compares the output to an instructor-maintained answer key.
 
@@ -133,7 +133,7 @@ def is_safe_select(query):
 
 def run_query(conn, query, schema):
     """
-    Executes a query with `schema` (then "public" as a fallback) on the
+    Executes a query with `schema` on the
     search path, and returns (rows, has_order_by).
     Rows are returned as a list of tuples, with all values coerced to str
     for reliable comparison across types.
@@ -142,7 +142,7 @@ def run_query(conn, query, schema):
     """
     has_order_by = bool(re.search(r"\border\s+by\b", query, re.IGNORECASE))
     with conn.cursor() as cur:
-        cur.execute(f'SET search_path TO "{schema}", public; {query};')
+        cur.execute(f'SET search_path TO "{schema}"; {query};')
         rows = cur.fetchall()
     rows = [tuple(str(v) for v in row) for row in rows]
     return rows, has_order_by

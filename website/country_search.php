@@ -8,10 +8,12 @@ function get_conn() {
     ]);
 }
 
-
+// get the search string from the url
 $searchstring = $_GET['searchstring'];
 
 if ($searchstring !== '') {
+    // prepare the query with a placeholder for the search string
+    // this is a parameterized query, which is safer than concatenating the search string directly into the query
     $sql = "
         SELECT name
         FROM world.country
@@ -20,8 +22,10 @@ if ($searchstring !== '') {
     ";
     $pattern = "%$searchstring%";
 
+    // execute the query with the search string as a parameter
     $stmt = get_conn()->prepare($sql);
     $stmt->execute([':pattern' => $pattern]);
+    // fetch all the results as an array of objects
     $countries = $stmt->fetchAll();
 }
 ?>
@@ -34,8 +38,8 @@ if ($searchstring !== '') {
 <ul>
   <li><a href="index.html">Home</a></li>
   <li><a href="gardner.html">Gardner</a></li>
-  <li><a href="form.php" class="active">Form 1</a></li>
-  <li><a href="country_search.php">Form 2</a></li>
+  <li><a href="form.php">Form 1</a></li>
+  <li><a href="country_search.php" class="active">Form 2</a></li>
 </ul>
 </nav>
 <div class="mainpage">
@@ -46,6 +50,8 @@ if ($searchstring !== '') {
     </form>
 
     <?php 
+    // display the results, with a new line after each country name
+    // $c-> retrieves the value of the "name" property of the object $c
     foreach ($countries as $c){ 
        echo $c->name."<br>"; 
     }  

@@ -33,6 +33,7 @@ if ($searchstring !== '') {
 <html>
 <head>
   <title>Country Search</title>
+  <link rel="stylesheet" href="mystyle.css">
 </head>
 <nav>
 <ul>

@@ -23,16 +23,20 @@
 </form> 
 
 <?php 
+
+// print the name
 if (isset($_GET["myname"]) && !empty($_GET["myname"])) { // the $_GET array contains the variables passed through the url
 													 // if we don't enter anything in the "myname" field, it will still pass an empty string
 													 // so in addition to checking whether a value has been set, we check that it is not empty
 	echo '<p>Hi, '.$_GET["myname"].".</p>"; // strings are surrounded with '' or "" and concatenated with .
 }	
 
+// print the color
 if (isset($_GET["mycolor"]) && !empty($_GET["mycolor"])) {
 	echo '<p>'.$_GET["mycolor"]." is a beautiful color.</p>"; 									
 } 
 
+// compute and print the factorial of N
 if (isset($_GET["N"]) && !empty($_GET["N"])) { 
 	$n = $_GET["N"]; //variables are identified with $
 	$fact = 1;		// initialization is optional. All variables are automatically initialized to 0/FALSE/blank string on creation

@@ -11,7 +11,7 @@ function get_conn() {
 // get the search string from the url
 $searchstring = $_GET['searchstring'];
 
-if ($searchstring !== '') {
+if (!empty($searchstring)) {
     // prepare the query with a placeholder for the search string
     // this is a parameterized query, which is safer than concatenating the search string directly into the query
     $sql = "

@@ -11,14 +11,14 @@ function get_conn() {
 
 $searchstring = $_GET['searchstring'];
 
-if ($q !== '') {
+if ($searchstring !== '') {
     $sql = "
         SELECT name
         FROM world.country
         WHERE name LIKE :pattern
         ORDER BY name
     ";
-    $pattern = "%$q%";
+    $pattern = "%$searchstring%";
 
     $stmt = get_conn()->prepare($sql);
     $stmt->execute([':pattern' => $pattern]);
@@ -41,13 +41,13 @@ if ($q !== '') {
 <div class="mainpage">
 <body>
     <form method="get" action="country_search.php">
-        <input type="text" name="searchstring" value="<?php $searchstring ?>">
+        <input type="text" name="searchstring" value="<?php echo $searchstring; ?>">
         <input type="submit" value="Search">
     </form>
 
     <?php 
     foreach ($countries as $c){ 
-       echo $c->code."<br>"; 
+       echo $c->name."<br>"; 
     }  
     ?> 
 </div>    

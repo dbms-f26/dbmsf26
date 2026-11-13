@@ -26,7 +26,7 @@ if ($_GET['submit']=="yes") {
     // fetch all the results as an array of objects
     //$countries = $stmt->fetchAll();
 }
-
+?>
 
 
 <!DOCTYPE html>
@@ -114,29 +114,19 @@ if ($_GET['submit']=="yes") {
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" name="languages[0][language]" maxlength="30" aria-label="Language 1"></td>
-              <td><input type="checkbox" name="languages[0][is_official]" value="true" aria-label="Language 1 is official"></td>
-              <td><input type="number" name="languages[0][percentage]" min="0" max="100" step="0.1" aria-label="Language 1 percentage"></td>
+              <td><input type="text" name="language[]" maxlength="30"></td>
+              <td><input type="checkbox" name="is_official[]" value="true"></td>
+              <td><input type="number" name="percentage[]" min="0" max="100" step="0.1"></td>
             </tr>
             <tr>
-              <td><input type="text" name="languages[1][language]" maxlength="30" aria-label="Language 2"></td>
-              <td><input type="checkbox" name="languages[1][is_official]" value="true" aria-label="Language 2 is official"></td>
-              <td><input type="number" name="languages[1][percentage]" min="0" max="100" step="0.1" aria-label="Language 2 percentage"></td>
+<td><input type="text" name="language[]" maxlength="30"></td>
+              <td><input type="checkbox" name="is_official[]" value="true"></td>
+              <td><input type="number" name="percentage[]" min="0" max="100" step="0.1"></td>
             </tr>
             <tr>
-              <td><input type="text" name="languages[2][language]" maxlength="30" aria-label="Language 3"></td>
-              <td><input type="checkbox" name="languages[2][is_official]" value="true" aria-label="Language 3 is official"></td>
-              <td><input type="number" name="languages[2][percentage]" min="0" max="100" step="0.1" aria-label="Language 3 percentage"></td>
-            </tr>
-            <tr>
-              <td><input type="text" name="languages[3][language]" maxlength="30" aria-label="Language 4"></td>
-              <td><input type="checkbox" name="languages[3][is_official]" value="true" aria-label="Language 4 is official"></td>
-              <td><input type="number" name="languages[3][percentage]" min="0" max="100" step="0.1" aria-label="Language 4 percentage"></td>
-            </tr>
-            <tr>
-              <td><input type="text" name="languages[4][language]" maxlength="30" aria-label="Language 5"></td>
-              <td><input type="checkbox" name="languages[4][is_official]" value="true" aria-label="Language 5 is official"></td>
-              <td><input type="number" name="languages[4][percentage]" min="0" max="100" step="0.1" aria-label="Language 5 percentage"></td>
+<td><input type="text" name="language[]" maxlength="30"></td>
+              <td><input type="checkbox" name="is_official[]" value="true"></td>
+              <td><input type="number" name="percentage[]" min="0" max="100" step="0.1"></td>
             </tr>
           </tbody>
         </table>

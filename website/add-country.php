@@ -1,3 +1,34 @@
+<?php
+
+// Open a connection to the database
+function get_conn() {
+    return new PDO('pgsql:host=localhost;port=5432;dbname=coursedb', 'student', 'student', [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+    ]);
+}
+
+if ($_GET['submit']=="yes") {
+
+    print_r($_GET);
+    // prepare the query with a placeholder for the search string
+    // this is a parameterized query, which is safer than concatenating the search string directly into the query
+    $sql = "
+        SELECT name
+        FROM world.country
+        WHERE name LIKE :pattern
+        ORDER BY name
+    ";
+    
+    // execute the query with the search string as a parameter
+    //$stmt = get_conn()->prepare($sql);
+    //$stmt->execute([':pattern' => $pattern]);
+    // fetch all the results as an array of objects
+    //$countries = $stmt->fetchAll();
+}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

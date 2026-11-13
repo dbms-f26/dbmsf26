@@ -7,9 +7,8 @@
 </head>
 <body>
   <main>
-    <h1>Add a country</h1>
 
-    <form action="/countries" method="post">
+    <form action="add-country.php" method="post">
       <!-- country.code: char(3), primary key -->
       <p>
         <label for="code">Country code</label><br>
@@ -26,7 +25,7 @@
       <!-- country.local_name: char(45) -->
       <p>
         <label for="local_name">Local name</label><br>
-        <input type="text" id="local_name" name="local_name" required maxlength="45">
+        <input type="text" id="local_name" name="local_name" maxlength="45">
       </p>
 
       <!-- country.continent: constrained to the CHECK list -->
@@ -56,17 +55,10 @@
         <input type="text" id="government_form" name="government_form" required maxlength="45">
       </p>
 
-      <!-- country.surface_area: numeric(10,2) -->
-      <p>
-        <label for="surface_area">Surface area (km²)</label><br>
-        <input type="number" id="surface_area" name="surface_area" required
-               min="0" max="99999999.99" step="0.01" value="0.00">
-      </p>
-
       <!-- country.population: integer -->
       <p>
         <label for="population">Population</label><br>
-        <input type="number" id="population" name="population" required
+        <input type="number" id="population" name="population"
                min="0" max="2147483647" step="1" value="0">
       </p>
 
@@ -120,7 +112,7 @@
       </fieldset>
 
       <p>
-        <button type="submit">Add country</button>
+        <button type="submit" name="submit" value="yes">Add country</button>
         <button type="reset">Clear</button>
       </p>
     </form>

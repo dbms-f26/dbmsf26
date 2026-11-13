@@ -8,7 +8,7 @@
 <body>
   <main>
 
-    <form action="add-country.php" method="post">
+    <form action="add-country.php" method="get">
       <!-- country.code: char(3), primary key -->
       <p>
         <label for="code">Country code</label><br>

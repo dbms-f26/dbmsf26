@@ -68,13 +68,14 @@ JOIN project.major m ON m.major_name = s.major_name;
 -- TO DO: 
 -- 1. Handle any other student-level multivalued fields you want to include by creating lookup tables and bridge tables
 -- 2. Load data from stg_activity into a new activity table
--- 3. Handle the multivalued competencies field by creating a "competency" table and a bridge table between activities and competencies 
+-- 3. Handle the multivalued competencies field by creating a "competency" table 
+--     (you'll need to add the number of points required to complete each competency) and a bridge table between activities and competencies 
 --     (similar to what was done for majors). Convert "levels" to points.
 -- 4. Load student_id, activity_id and any other data specific to a student completing an activity from stg_student_activity 
 --    into student_activity table
 -- 5. Run a join query to confirm you get 23 rows when students are combined with activity completions
 -- 6. Check your schema against your schema design. Make necessary changes (on either side) to bring them in sync. 
--- This includes creating additional tables in the schema and populating them with data from the staging tables or your own made-up data
+-- This includes creating additional tables in the schema and populating them with data from the staging tables or your own made-up data.
 -- It also includes adding/removing things from the schema design. 
 
 

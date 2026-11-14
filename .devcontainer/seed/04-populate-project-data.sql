@@ -72,7 +72,7 @@ JOIN project.major m ON m.major_name = s.major_name;
 --     (you'll need to add the number of points required to complete each competency) and a bridge table between activities and competencies 
 --     (similar to what was done for majors). Convert "levels" to points.
 -- 4. Load student_id, activity_id and any other data specific to a student completing an activity from stg_student_activity 
---    into student_activity table
+--    into student_activity table. Add additional columns (reflection text? approval status?) as needed.
 -- 5. Run a join query to confirm you get 23 rows when students are combined with activity completions
 -- 6. Check your schema against your schema design. Make necessary changes (on either side) to bring them in sync. 
 -- This includes creating additional tables in the schema and populating them with data from the staging tables or your own made-up data.

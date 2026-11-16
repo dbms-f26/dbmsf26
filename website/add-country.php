@@ -39,7 +39,7 @@ try {
         'local_name'  => $_GET['local_name']      ?? null,
         'continent' => $_GET['continent']      ?? null,
         'region' => $_GET['region']      ?? null,
-        'government_form' => $_GET['govenrment_form']      ?? null,
+        'government_form' => $_GET['government_form']      ?? null,
         'population' => $_GET['population'] ?? null, 
         'indep_year' => $_GET['indep_year'] ?? null
     ];

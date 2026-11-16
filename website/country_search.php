@@ -1,15 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>Country Search</title>
+  <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
 <?php
 
 // Open a connection to the database
 function get_conn() {
     return new PDO('pgsql:host=localhost;port=5432;dbname=coursedb', 'student', 'student', [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_NUM,
     ]);
 }
 
+$sql_continents = "SELECT DISTINCT Continent 
+                   FROM world.country
+                   ORDER BY Continent";
+
+$stmt = get_conn()->prepare($sql_continents);
+$stmt->execute();
+$continents = $stmt->fetchAll();
+
+print_r($continents);
+
+
 // get the search string from the url
 $searchstring = $_GET['searchstring'];
+$continent = $_GET['continent'];
 
 if (!empty($searchstring)) {
     // prepare the query with a placeholder for the search string
@@ -17,24 +36,19 @@ if (!empty($searchstring)) {
     $sql = "
         SELECT name
         FROM world.country
-        WHERE name LIKE :pattern
+        WHERE name LIKE :pattern AND continent = :continent
         ORDER BY name
     ";
     $pattern = "%$searchstring%";
 
     // execute the query with the search string as a parameter
     $stmt = get_conn()->prepare($sql);
-    $stmt->execute([':pattern' => $pattern]);
-    // fetch all the results as an array of objects
+    $stmt->execute([':pattern' => $pattern,':continent'=>$continent]);
+    // fetch all the results as an array of arrays
     $countries = $stmt->fetchAll();
 }
 ?>
-<!doctype html>
-<html>
-<head>
-  <title>Country Search</title>
-  <link rel="stylesheet" href="mystyle.css">
-</head>
+
 <nav>
 <ul>
   <li><a href="index.html">Home</a></li>
@@ -44,17 +58,26 @@ if (!empty($searchstring)) {
 </ul>
 </nav>
 <div class="mainpage">
-<body>
     <form method="get" action="country_search.php">
         <input type="text" name="searchstring" value="<?php echo $searchstring; ?>">
-        <input type="submit" value="Search">
+        <select name="continent">
+        <?php
+        foreach($continents as $c){
+            echo '<option value="'.$c[0].'"';
+            if ($c[0] == $continent)
+                echo ' selected ';
+            echo '>'.$c[0].'</option>';
+        } 
+        ?>
+        </select>
+     <input type="submit" value="Search">
     </form>
 
     <?php 
     // display the results, with a new line after each country name
-    // $c-> retrieves the value of the "name" property of the object $c
+    // $c[0] retrieves the value of the first column (name) of the row $c
     foreach ($countries as $c){ 
-       echo $c->name."<br>"; 
+       echo $c[0]."<br>"; 
     }  
     ?> 
 </div>    

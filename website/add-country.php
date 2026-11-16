@@ -11,20 +11,55 @@ function get_conn() {
 if ($_GET['submit']=="yes") {
 
     print_r($_GET);
-    // prepare the query with a placeholder for the search string
-    // this is a parameterized query, which is safer than concatenating the search string directly into the query
-    $sql = "
-        SELECT name
-        FROM world.country
-        WHERE name LIKE :pattern
-        ORDER BY name
-    ";
-    
-    // execute the query with the search string as a parameter
-    //$stmt = get_conn()->prepare($sql);
-    //$stmt->execute([':pattern' => $pattern]);
-    // fetch all the results as an array of objects
-    //$countries = $stmt->fetchAll();
+function dumpSqlForDebugging($pdo, $sql, $params) {
+    foreach ($params as $key => $value) {
+        $placeholder = str_starts_with($key, ':') ? $key : ':' . $key;
+        if (is_int($value) || is_float($value)) {
+            $formatted = (string) $value;
+        } else {
+            $formatted = $pdo->quote((string) $value);
+        }
+        $sql = preg_replace('/' . preg_quote($placeholder, '/') . '\b/', $formatted, $sql);
+    }
+    echo htmlspecialchars($sql);
+}
+
+$pdo = get_conn();
+
+try {
+    // 1. Start the transaction
+    $pdo->beginTransaction();
+
+    // 2. Insert the main record (Parent)
+    $userSql = "INSERT INTO world.country (code, name, local_name, continent, region, government_form, population, indep_year) 
+                VALUES (:code, :name, :local_name, :continent, :region, :government_form, :population, :indep_year)";
+    $userData = [
+        'code' => $_GET['code'] ?? null,
+        'name'  => $_GET['name']  ?? null,
+        'local_name'  => $_GET['local_name']      ?? null,
+        'continent' => $_GET['continent']      ?? null,
+        'government_form' => $_GET['govenrment_form']      ?? null,
+        'population' => $_GET['population'] ?? null, 
+        'indep_year' => $_GET['indep_year'] ?? null
+    ];
+
+    // Uncomment the line below if your query fails and you want to test it in SQL:
+    dumpSqlForDebugging($pdo, $userSql, $userData);
+
+    $userStmt = $pdo->prepare($userSql);
+    $userStmt->execute($userData);
+
+    // 4. Everything worked! Save all changes permanently.
+    $pdo->commit();
+    echo "<p>Success! User and dependents saved.</p>";
+
+} catch (PDOException $e) {
+    // 5. Something broke! Undo everything back to step 1.
+    $pdo->rollBack();
+
+    // Show the exact database error
+    echo "<p>Database Error:" . htmlspecialchars($e->getMessage())."</p>";
+}
 }
 ?>
 

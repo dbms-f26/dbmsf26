@@ -1,0 +1,103 @@
+body {
+    background: #c9feff;
+    margin: 0px;
+}
+
+.mainpage {
+    margin: 0px 50px;
+    background-color: white;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+nav {
+    position: sticky; top: 0;
+}
+
+nav ul { 
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0077ff;
+    justify-content: center;
+    display: flex;
+} 
+
+nav li { 
+    float: left;
+}
+
+nav li a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+nav a.active {
+  background-color: #04AA6D;
+}
+
+ul li a:hover {
+    background-color: #0255b3;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color:azure;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid white;
+}
+
+th {
+    padding: 10px;
+    background-color: #0077ff;
+    color: white;
+    border: 1px solid white;
+}
+
+
+form {
+  border-radius: 10px;
+  background-color: #06dde0a3;
+  padding: 20px;
+  margin: 20px;
+}
+
+label {display: block;}
+
+input[type=text], input[type=number], select {
+  width: 300px;
+  padding: 5px;
+  margin: 5px 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  width: 25px;
+  height: 25px;  
+  margin: 5px 0;
+  display: block;
+  box-sizing: border-box;  
+}
+
+
+input[type=submit], button {
+  font-family: inherit;
+  font-size: inherit;
+  width: 100px;
+  padding: 5px;
+  margin: 5px 0;
+  display: block;
+  box-sizing: border-box;
+  background-color: #0077ff;
+  color: white;
+}
+

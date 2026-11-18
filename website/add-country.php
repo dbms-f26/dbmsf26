@@ -16,33 +16,60 @@ try {
     // 1. Start the transaction
     $pdo->beginTransaction();
 
-    // 2. Insert the main record (Parent)
+    if($_GET["mode"] == "add"){
+       
+      // 2. Insert the main record (Parent)
 
-    // a) make a list of all fields
-    $fields = ['code', 'name', 'local_name', 'continent', 'region',
-           'government_form', 'population', 'indep_year'];
+      // a) make a list of all fields
+      $fields = ['code', 'name', 'local_name', 'continent', 'region',
+            'government_form', 'population', 'indep_year'];
 
-    // b) keep only fields that actually have a value
-    $countrydata = array_filter(
-        array_intersect_key($_GET, array_flip($fields)),
-        fn($v) => $v !== ''
-    );
+      // b) keep only fields that actually have a value
+      $countrydata = array_filter(
+          array_intersect_key($_GET, array_flip($fields)),
+          fn($v) => $v !== ''
+      );
 
-    $cols = array_keys($countrydata);
-    $countrysql  = 'INSERT INTO country (' . implode(', ', $cols) . ') VALUES (:' . implode(', :', $cols) . ')';
+      $cols = array_keys($countrydata);
+      $countrysql  = 'INSERT INTO country (' . implode(', ', $cols) . ') VALUES (:' . implode(', :', $cols) . ')';
+    }
+    else {
+      // update values in country
+      $countrysql = "UPDATE country SET name = :name, 
+                     local_name = :local_name, 
+                     continent = :continent, 
+                     region = :region, 
+                     government_form = :government_form, 
+                     population = :population, 
+                     indep_year = :indep_year WHERE code = :code";
+      $countrydata = [
+          'code' => $_GET["code"],
+          'name' => $_GET["name"],
+          'local_name' => $_GET["local_name"] ?? null,
+          'continent' => $_GET["continent"],
+          'region' => $_GET["region"],
+          'government_form' => $_GET["government_form"],
+          'population' => $_GET["population"],
+          'indep_year' => $_GET["indep_year"] ?? null,
+      ];
 
+      $deleteChildSql = "DELETE FROM world.countrylanguage 
+                         WHERE country_code = :country_code";
+      $deleteChildStmt = $pdo->prepare($deleteChildSql);
+      $deleteChildStmt->execute(['country_code' => $_GET["code"]]);
+
+    }
     // Uncomment the line below if your query fails and you want to test it in SQL:
     dumpSqlForDebugging($pdo, $countrysql, $countrydata);
 
     $stmt = $pdo->prepare($countrysql);
     $stmt->execute($countrydata);
 
-
     // 3. Insert the child records
   
     // prepare the query once
     $childSql = "INSERT INTO world.countrylanguage (country_code, language, is_official, percentage) 
-                     VALUES (:country_code, :language, :is_official, :percentage)";
+                    VALUES (:country_code, :language, :is_official, :percentage)";
     $childStmt = $pdo->prepare($childSql);
     // iterate over the elements of the arrays holding child info
     for ($i = 0; $i < count($_GET["language"]); $i++) {
@@ -79,13 +106,17 @@ try {
   
         <label for="code">Country code</label>
         <input type="text" id="code" name="code" required minlength="3" maxlength="3"
-               pattern="[A-Za-z]{3}" placeholder="e.g. NLD">
+               pattern="[A-Za-z]{3}" placeholder="e.g. NLD" 
+               value="<?php echo htmlspecialchars($_GET['code'] ?? ''); ?>">
  
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" required maxlength="52">
+        <input type="text" id="name" name="name" 
+        value="<?php echo htmlspecialchars($_GET['name'] ?? ''); ?>" required maxlength="52">
 
         <label for="local_name">Local name (optional) </label>
-        <input type="text" id="local_name" name="local_name" maxlength="45">
+        <input type="text" id="local_name" name="local_name" 
+        value = "<?php echo htmlspecialchars($_GET['local_name'] ?? ''); ?>"
+        maxlength="45">
 
         <label for="continent">Continent</label>
         <select id="continent" name="continent" required>
@@ -94,25 +125,31 @@ try {
         
          foreach($continents as $c){
             echo '<option value="'.$c[0].'"';
-            //if ($c[0] == $continent) {
-            //    echo ' selected ';}
+            if ($c[0] == $_GET['continent'] ?? '') {
+                echo ' selected ';}
             echo '>'.$c[0].'</option>';
          }     
          ?>
         </select>
 
         <label for="region">Region</label>
-        <input type="text" id="region" name="region" required maxlength="26">
+        <input type="text" id="region" 
+        value="<?php echo htmlspecialchars($_GET['region'] ?? ''); ?>" 
+        name="region" required maxlength="26">
 
         <label for="government_form">Government form</label>
-        <input type="text" id="government_form" name="government_form" required maxlength="45">
+        <input type="text" id="government_form"
+         value="<?php echo htmlspecialchars($_GET['government_form'] ?? ''); ?>"
+         name="government_form" required maxlength="45">
 
         <label for="population">Population</label>
         <input type="number" id="population" name="population" required
+               value="<?php echo htmlspecialchars($_GET['population'] ?? '0'); ?>" 
                min="0" max="10000000000" step="1" value="0">
 
         <label for="indep_year">Independence year (optional)</label>
         <input type="number" id="indep_year" name="indep_year" 
+        value="<?php echo htmlspecialchars($_GET['indep_year'] ?? ''); ?>"
                min="-32768" max="32767" step="1">
 
       <fieldset>

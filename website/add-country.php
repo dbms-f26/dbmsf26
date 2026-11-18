@@ -50,6 +50,28 @@ try {
     $userStmt = $pdo->prepare($userSql);
     $userStmt->execute($userData);
 
+
+    // 3. Insert the child records
+  
+    // prepare the query once
+    $childSql = "INSERT INTO world.countrylanguage (country_code, language, is_official, percentage) 
+                     VALUES (:country_code, :language, :is_official, :percentage)";
+    $childStmt = $pdo->prepare($childSql);
+    // iterate over the elements of the arrays holding child info
+    for ($i = 0; $i < count($_GET["language"]); $i++) {
+            // Skip completely blank rows if the user left extra form inputs empty
+            if (!empty($_GET["language"][$i])){
+              $childStmt->execute([
+                  'country_code' => $_GET["code"],
+                  'language'   => $_GET["language"][$i] ?? null,
+                  'is_official'   => $_GET["is_official"][$i] ?? false,
+                  'percentage'    => $_GET["percentage"][$i] ?? null,
+              ]);
+            }
+    }
+
+
+
     // 4. Everything worked! Save all changes permanently.
     $pdo->commit();
     echo "<p>Success! User and dependents saved.</p>";

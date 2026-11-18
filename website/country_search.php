@@ -16,33 +16,33 @@ $continents = $stmt->fetchAll(PDO::FETCH_NUM);
 $searchstring = $_GET['searchstring'];
 $continent = $_GET['continent'];
 
-if (!empty($searchstring) || !empty($continent)) { 
-    $sql = "
-    SELECT c.code, c.name, c.population, c.head_of_state, ci.name as city_name, 
-    string_agg(cb.points::text, ',' ORDER BY cb.badge_id) AS badgepoints
-    FROM country c JOIN city ci on c.capital = ci.id
-    JOIN countrybadges cb ON c.code = cb.country_code
-    WHERE C.name ILIKE :pattern";
+// show results even when no filters are applied
 
-    $params = ['pattern' => "%".$searchstring."%"];
-    
-    // if continent is present, add it to the where clause and the list of parameters
-    if (!empty($continent)){
-        $sql = $sql." AND C.continent = :continent ";
+$sql = "
+SELECT c.code, c.name, c.population, c.head_of_state, ci.name as city_name, 
+string_agg(cb.points::text, ',' ORDER BY cb.badge_id) AS badgepoints
+FROM country c JOIN city ci on c.capital = ci.id
+JOIN countrybadges cb ON c.code = cb.country_code
+WHERE C.name ILIKE :pattern";
 
-        $params['continent'] = $continent;
-    }
-    
-    $sql = $sql." GROUP BY c.code, c.name, c.population, c.head_of_state, ci.name 
-    ORDER BY c.name";  
+$params = ['pattern' => "%".$searchstring."%"];
 
-    $stmt = $pdo->prepare($sql);
+// if continent is present, add it to the where clause and the list of parameters
+if (!empty($continent)){
+    $sql = $sql." AND C.continent = :continent ";
 
-    //dumpSqlForDebugging($pdo, $sql, $params);
-
-    $stmt->execute($params);
-    $countries = $stmt->fetchAll(PDO::FETCH_NUM);
+    $params['continent'] = $continent;
 }
+
+$sql = $sql." GROUP BY c.code, c.name, c.population, c.head_of_state, ci.name 
+ORDER BY c.name";  
+
+$stmt = $pdo->prepare($sql);
+
+//dumpSqlForDebugging($pdo, $sql, $params);
+
+$stmt->execute($params);
+$countries = $stmt->fetchAll(PDO::FETCH_NUM);
     
 ?>
 <div class="mainpage">

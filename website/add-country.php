@@ -17,18 +17,19 @@ try {
     $pdo->beginTransaction();
 
     // 2. Insert the main record (Parent)
-    $countrysql = "INSERT INTO country (code, name, local_name, continent, region, government_form, population, indep_year) 
-                VALUES (:code, :name, :local_name, :continent, :region, :government_form, :population, :indep_year)";
-    $countrydata = [
-        'code' => $_GET['code'] ?? null,
-        'name'  => $_GET['name']  ?? null,
-        'local_name'  => $_GET['local_name']      ?? null,
-        'continent' => $_GET['continent']      ?? null,
-        'region' => $_GET['region']      ?? null,
-        'government_form' => $_GET['government_form']      ?? null,
-        'population' => $_GET['population'] ?? null, 
-        'indep_year' => $_GET['indep_year'] ?? null
-    ];
+
+    // a) make a list of all fields
+    $fields = ['code', 'name', 'local_name', 'continent', 'region',
+           'government_form', 'population', 'indep_year'];
+
+    // b) keep only fields that actually have a value
+    $countrydata = array_filter(
+        array_intersect_key($_GET, array_flip($fields)),
+        fn($v) => $v !== ''
+    );
+
+    $cols = array_keys($countrydata);
+    $countrysql  = 'INSERT INTO country (' . implode(', ', $cols) . ') VALUES (:' . implode(', :', $cols) . ')';
 
     // Uncomment the line below if your query fails and you want to test it in SQL:
     dumpSqlForDebugging($pdo, $countrysql, $countrydata);
@@ -47,25 +48,28 @@ try {
     for ($i = 0; $i < count($_GET["language"]); $i++) {
             // Skip completely blank rows if the user left extra form inputs empty
             if (!empty($_GET["language"][$i])){
-              $childStmt->execute([
+              $params = [
                   'country_code' => $_GET["code"],
                   'language'   => $_GET["language"][$i] ?? null,
-                  'is_official'   => $_GET["is_official"][$i] ?? false,
+                  'is_official'   => $_GET["is_official"][$i] ?? 'false',
                   'percentage'    => $_GET["percentage"][$i] ?? null,
-              ]);
+              ];
+              dumpSqlForDebugging($pdo, $childSql, $params);
+              $childStmt->execute($params);
             }
     }
 
     // 4. Everything worked! Save all changes permanently.
     $pdo->commit();
-    echo "<p>Success! User and dependents saved.</p>";
+    echo "<p>Success!</p>";
 
 } catch (PDOException $e) {
-    // 5. Something broke! Undo everything back to step 1.
+    // 5. Something broke! Undo everything.
     $pdo->rollBack();
+    echo "<p>Failure!</p>";
 
     // Show the exact database error
-    echo "<p>Database Error:" . htmlspecialchars($e->getMessage())."</p>";
+    echo "<p>Database Error: " . htmlspecialchars($e->getMessage())."</p>";
 }
 }
 ?>

@@ -19,7 +19,7 @@ $continent = $_GET['continent'];
 // show results even when no filters are applied
 
 $sql = "
-SELECT c.code, c.name, c.population, c.head_of_state, ci.name as city_name, 
+SELECT c.name, c.population, c.head_of_state, ci.name as city_name, 
 string_agg(cb.points::text, ',' ORDER BY cb.badge_id) AS badgepoints
 FROM country c JOIN city ci on c.capital = ci.id
 JOIN countrybadges cb ON c.code = cb.country_code
@@ -34,7 +34,7 @@ if (!empty($continent)){
     $params['continent'] = $continent;
 }
 
-$sql = $sql." GROUP BY c.code, c.name, c.population, c.head_of_state, ci.name 
+$sql = $sql." GROUP BY c.name, c.population, c.head_of_state, ci.name 
 ORDER BY c.name";  
 
 $stmt = $pdo->prepare($sql);
@@ -78,10 +78,10 @@ if (!empty($countries)) {
 
     foreach ($countries as $row){ 
         echo '<tr>';
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 0; $i < 4; $i++) {
     	     echo '<td>'.$row[$i].'</td>';}
-        $row[5] = explode(',', $row[5]); // turns the comma-delimited list back into an array
-        foreach ($row[5] as $points) {
+        $row[4] = explode(',', $row[4]); // turns the comma-delimited list back into an array
+        foreach ($row[4] as $points) {
            echo '<td>'.$points.'</td>';
         }   
         echo '</tr>';

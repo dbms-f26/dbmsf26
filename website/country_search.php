@@ -21,8 +21,8 @@ $continent = $_GET['continent'];
 $sql = "
 SELECT c.name, c.population, c.head_of_state, ci.name as city_name, 
 string_agg(cb.points::text, ',' ORDER BY cb.badge_id) AS badgepoints
-FROM country c JOIN city ci on c.capital = ci.id
-JOIN countrybadges cb ON c.code = cb.country_code
+FROM country c LEFT JOIN city ci on c.capital = ci.id
+LEFT JOIN countrybadges cb ON c.code = cb.country_code
 WHERE C.name ILIKE :pattern";
 
 $params = ['pattern' => "%".$searchstring."%"];
@@ -39,7 +39,7 @@ ORDER BY c.name";
 
 $stmt = $pdo->prepare($sql);
 
-//dumpSqlForDebugging($pdo, $sql, $params);
+dumpSqlForDebugging($pdo, $sql, $params);
 
 $stmt->execute($params);
 $countries = $stmt->fetchAll(PDO::FETCH_NUM);

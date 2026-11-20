@@ -160,7 +160,7 @@ try {
               <th>Official</th>
               <th>Percentage of population</th>
             </tr>
-            <tr>
+               <tr>
               <td><input type="text" name="language[]" maxlength="30"></td>
               <td><input type="checkbox" name="is_official[]" value="true"></td>
               <td><input type="number" name="percentage[]" min="0" max="100" step="0.1"></td>
